@@ -5,6 +5,8 @@
  */
 package studentmanagementsystem;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author ADSI
@@ -16,6 +18,9 @@ public class StudentManagementSystem {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        MainFrame mf=new MainFrame();
+        mf.setVisible(true);
+        mf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
 }
