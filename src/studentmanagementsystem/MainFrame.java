@@ -80,8 +80,18 @@ public class MainFrame extends javax.swing.JFrame {
         btn_viewStudent.setText("View Student");
 
         btn_updateStudent.setText("Update Student");
+        btn_updateStudent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_updateStudentActionPerformed(evt);
+            }
+        });
 
         btn_deleteStudent.setText("Delete Student");
+        btn_deleteStudent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_deleteStudentActionPerformed(evt);
+            }
+        });
 
         tbl_StudentData.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -94,6 +104,11 @@ public class MainFrame extends javax.swing.JFrame {
                 "Reg ID", "First Name", "Last Name", "Faculty", "Department"
             }
         ));
+        tbl_StudentData.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_StudentDataMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbl_StudentData);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -210,6 +225,23 @@ public class MainFrame extends javax.swing.JFrame {
         asf.setVisible(true);
         asf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_btn_addnewStudentActionPerformed
+
+    private void btn_updateStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateStudentActionPerformed
+        UpdateStudentFrame usf=new UpdateStudentFrame();
+        usf.setVisible(true);
+        usf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_btn_updateStudentActionPerformed
+
+    private void btn_deleteStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteStudentActionPerformed
+        DeleteStudentFrame dsf=new DeleteStudentFrame();
+        dsf.setVisible(true);
+        dsf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_btn_deleteStudentActionPerformed
+
+    private void tbl_StudentDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_StudentDataMouseClicked
+        int index=tbl_StudentData.getSelectedRow();
+        System.out.println(index);
+    }//GEN-LAST:event_tbl_StudentDataMouseClicked
 
     /**
      * @param args the command line arguments

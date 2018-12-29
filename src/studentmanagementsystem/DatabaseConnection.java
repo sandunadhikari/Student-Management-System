@@ -83,4 +83,19 @@ public class DatabaseConnection {
         }
     }
     
+    public boolean DeleteStudent(Student student){
+        Connection con=getConnection();
+        String DeleteQuery="DELETE FROM studentdetails WHERE Id=?";
+        PreparedStatement ps=null;
+        try {
+            ps=con.prepareStatement(DeleteQuery);
+            ps.setInt(1, student.getID());
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+            return  false;
+        }
+    }
+    
 }

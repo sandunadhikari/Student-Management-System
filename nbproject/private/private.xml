@@ -3,8 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ADSI/Documents/NetBeansProjects/StudentManagementSystem/src/studentmanagementsystem/MainFrame.java</file>
-            <file>file:/C:/Users/ADSI/Documents/NetBeansProjects/StudentManagementSystem/src/studentmanagementsystem/StudentManagementSystem.java</file>
+            <file>file:/C:/Users/ADSI/Documents/NetBeansProjects/StudentManagementSystem/Student-Management-System/src/studentmanagementsystem/MainFrame.java</file>
+            <file>file:/C:/Users/ADSI/Documents/NetBeansProjects/StudentManagementSystem/Student-Management-System/src/studentmanagementsystem/DatabaseConnection.java</file>
+            <file>file:/C:/Users/ADSI/Documents/NetBeansProjects/StudentManagementSystem/Student-Management-System/src/studentmanagementsystem/AddStudentFrame.java</file>
+            <file>file:/C:/Users/ADSI/Documents/NetBeansProjects/StudentManagementSystem/Student-Management-System/src/studentmanagementsystem/Student.java</file>
+            <file>file:/C:/Users/ADSI/Documents/NetBeansProjects/StudentManagementSystem/Student-Management-System/src/studentmanagementsystem/StudentManagementSystem.java</file>
         </group>
     </open-files>
 </project-private>
