@@ -5,6 +5,8 @@
  */
 package studentmanagementsystem;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ADSI
@@ -14,6 +16,8 @@ public class UpdateStudentFrame extends javax.swing.JFrame {
     /**
      * Creates new form UpdateStudentFrame
      */
+    DatabaseConnection bdConnection = new DatabaseConnection();
+
     public UpdateStudentFrame() {
         initComponents();
     }
@@ -89,7 +93,14 @@ public class UpdateStudentFrame extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel10.setText("Reg ID");
 
+        txt_id.setEnabled(false);
+
         btn_update.setText("Update");
+        btn_update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_updateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -195,9 +206,55 @@ public class UpdateStudentFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
+        if (cheackerValue()) {
+            Student s = new Student();
+            s.setID(new Integer(txt_id.getText()).intValue());
+            s.setFname(txt_fname.getText());
+            s.setLname(txt_lastname.getText());
+            s.setAge(Integer.parseInt(txt_age.getText()));
+            s.setAddress(txt_address.getText());
+            s.setGender((String) dd_gender.getSelectedItem());
+            s.setFaculty((String) dd_faculty.getSelectedItem());
+            s.setDepartment((String) dd_department.getSelectedItem());
+            s.setRegYear((String) dd_yearofREG.getSelectedItem());
+            boolean result = bdConnection.UpdateStudent(s);
+            if (result) {
+                JOptionPane.showMessageDialog(this, "Updated");
+                this.dispose();
+                return;
+            } else {
+                JOptionPane.showMessageDialog(this, "Error ocured");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "One or more filelds empty");
+        }
+
+    }//GEN-LAST:event_btn_updateActionPerformed
+    public boolean cheackerValue() {
+        if (txt_fname.getText().equals("") || txt_lastname.getText().equals("") || txt_age.getText().equals("") || txt_address.getText().equals("")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
+    public void setFeild(Student s) {
+        txt_id.setText(new Integer(s.getID()).toString());
+        txt_fname.setText(s.getFname());
+        txt_lastname.setText(s.getLname());
+        txt_age.setText(new Integer(s.getAge()).toString());
+        txt_address.setText(s.getAddress());
+        dd_gender.setSelectedItem(s.getGender());
+        dd_faculty.setSelectedItem(s.getFaculty());
+        dd_department.setSelectedItem(s.getDepartment());
+        dd_yearofREG.setSelectedItem(s.getRegYear());
+
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

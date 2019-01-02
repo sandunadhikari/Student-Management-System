@@ -5,21 +5,19 @@
  */
 package studentmanagementsystem;
 
-import javax.swing.JOptionPane;
-
 /**
  *
  * @author ADSI
  */
-public class DeleteStudentFrame extends javax.swing.JFrame {
+public class ViewStudentFrame extends javax.swing.JFrame {
 
     /**
-     * Creates new form DeleteStudentFrame
+     * Creates new form ViewStudentFrame
      */
-    DatabaseConnection dbConnection=new DatabaseConnection();
-    public DeleteStudentFrame() {
+    public ViewStudentFrame() {
         initComponents();
     }
+    
     public void selectFeild(Student s){
         txt_id.setText(new Integer(s.getID()).toString());
         txt_fname.setText(s.getFname());
@@ -61,7 +59,6 @@ public class DeleteStudentFrame extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         txt_id = new javax.swing.JTextField();
-        btn_delete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -98,19 +95,12 @@ public class DeleteStudentFrame extends javax.swing.JFrame {
         dd_yearofREG.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2015", "2014", "2013", "2012" }));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel9.setText("Delete STUDENT DETAILS");
+        jLabel9.setText("STUDENT DETAILS");
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel10.setText("Reg ID");
 
         txt_id.setEnabled(false);
-
-        btn_delete.setText("Delete");
-        btn_delete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_deleteActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -118,9 +108,6 @@ public class DeleteStudentFrame extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(282, 282, 282)
-                        .addComponent(jLabel9))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(131, 131, 131)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,16 +132,16 @@ public class DeleteStudentFrame extends javax.swing.JFrame {
                             .addComponent(dd_department, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(dd_yearofREG, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(272, 272, 272)
-                        .addComponent(btn_delete)))
+                        .addGap(330, 330, 330)
+                        .addComponent(jLabel9)))
                 .addContainerGap(319, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(21, 21, 21)
                 .addComponent(jLabel9)
-                .addGap(69, 69, 69)
+                .addGap(68, 68, 68)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -193,9 +180,7 @@ public class DeleteStudentFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(dd_yearofREG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
-                .addGap(41, 41, 41)
-                .addComponent(btn_delete)
-                .addContainerGap(144, Short.MAX_VALUE))
+                .addContainerGap(208, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -216,27 +201,6 @@ public class DeleteStudentFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
-        Student s=new Student();
-        s.setID(new Integer(txt_id.getText()).intValue());
-        s.setFname(txt_fname.getText());
-        s.setLname(txt_lastname.getText());
-        s.setAge(Integer.parseInt(txt_age.getText()));
-        s.setAddress(txt_address.getText());
-        s.setGender((String) dd_gender.getSelectedItem());
-        s.setFaculty((String) dd_faculty.getSelectedItem());
-        s.setDepartment((String)dd_department.getSelectedItem());
-        s.setRegYear((String) dd_yearofREG.getSelectedItem());
-        boolean result=dbConnection.DeleteStudent(s);
-        if (result) {
-            JOptionPane.showMessageDialog(this, "Deleted");
-            this.dispose();
-            return;
-        } else {
-            JOptionPane.showMessageDialog(this, "Error ocureded");
-        }
-    }//GEN-LAST:event_btn_deleteActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -254,26 +218,25 @@ public class DeleteStudentFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DeleteStudentFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewStudentFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DeleteStudentFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewStudentFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DeleteStudentFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewStudentFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DeleteStudentFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewStudentFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DeleteStudentFrame().setVisible(true);
+                new ViewStudentFrame().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_delete;
     private javax.swing.JComboBox dd_department;
     private javax.swing.JComboBox dd_faculty;
     private javax.swing.JComboBox dd_gender;

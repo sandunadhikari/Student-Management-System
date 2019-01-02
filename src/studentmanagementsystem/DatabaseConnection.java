@@ -97,5 +97,28 @@ public class DatabaseConnection {
             return  false;
         }
     }
+    public boolean UpdateStudent(Student student){
+        Connection con=getConnection();
+        String UpdateQuery="UPDATE studentdetails SET Fname=?,Lname=?,Age=?,Address=?,Gender=?,Faculty=?,Department=?,RegYear=? WHERE Id=?";
+        PreparedStatement ps=null;
+        try {
+            ps=con.prepareStatement(UpdateQuery);
+            ps.setString(1, student.getFname());
+            ps.setString(2, student.getLname());
+            ps.setInt(3, student.getAge());
+            ps.setString(4, student.getAddress());
+            ps.setString(5, student.getGender());
+            ps.setString(6, student.getFaculty());
+            ps.setString(7, student.getDepartment());
+            ps.setString(8, student.getRegYear());
+            
+            ps.setInt(9, student.getID());
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+            return  false;
+        }
+    }
     
 }

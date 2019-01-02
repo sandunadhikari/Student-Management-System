@@ -5,8 +5,11 @@
  */
 package studentmanagementsystem;
 
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -18,27 +21,30 @@ public class MainFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainFrame
      */
-    DatabaseConnection dbc=new DatabaseConnection();
+    DatabaseConnection dbc = new DatabaseConnection();
+    ArrayList<Student> list;
+
     public MainFrame() {
         initComponents();
         showDataTable();
     }
-    public void showDataTable(){
-        System.out.println("ooooooooookk");
-        ArrayList<Student> list=dbc.getData();
-        DefaultTableModel model=(DefaultTableModel) tbl_StudentData.getModel();
+
+    public void showDataTable() {
+        list = dbc.getData();
+        DefaultTableModel model = (DefaultTableModel) tbl_StudentData.getModel();
         model.setRowCount(0);
-        Object[] row=new Object[5];
-        for(int i=0;i<list.size();i++){
-            row[0]=list.get(i).getID();
-            row[1]=list.get(i).getFname();
-            row[2]=list.get(i).getLname();
-            row[3]=list.get(i).getFaculty();
-            row[4]=list.get(i).getDepartment();
-            
+        Object[] row = new Object[5];
+        for (int i = 0; i < list.size(); i++) {
+            row[0] = list.get(i).getID();
+            row[1] = list.get(i).getFname();
+            row[2] = list.get(i).getLname();
+            row[3] = list.get(i).getFaculty();
+            row[4] = list.get(i).getDepartment();
+
             model.addRow(row);
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -78,6 +84,11 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         btn_viewStudent.setText("View Student");
+        btn_viewStudent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_viewStudentActionPerformed(evt);
+            }
+        });
 
         btn_updateStudent.setText("Update Student");
         btn_updateStudent.addActionListener(new java.awt.event.ActionListener() {
@@ -221,33 +232,148 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_addnewStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addnewStudentActionPerformed
-        AddStudentFrame asf=new AddStudentFrame();
+        AddStudentFrame asf = new AddStudentFrame();
         asf.setVisible(true);
         asf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        asf.addWindowListener(new WindowListener() {
+
+            @Override
+            public void windowOpened(WindowEvent e) {
+            }
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+                showDataTable();
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+            }
+        });
     }//GEN-LAST:event_btn_addnewStudentActionPerformed
 
     private void btn_updateStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateStudentActionPerformed
-        UpdateStudentFrame usf=new UpdateStudentFrame();
-        usf.setVisible(true);
-        usf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        if (tbl_StudentData.getSelectedRow() >= 0) {
+            UpdateStudentFrame usf = new UpdateStudentFrame();
+            usf.setVisible(true);
+            usf.setFeild(list.get(tbl_StudentData.getSelectedRow()));
+            usf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            usf.addWindowListener(new WindowListener() {
+
+                @Override
+                public void windowOpened(WindowEvent e) {
+                }
+
+                @Override
+                public void windowClosing(WindowEvent e) {
+                }
+
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    showDataTable();
+                }
+
+                @Override
+                public void windowIconified(WindowEvent e) {
+                }
+
+                @Override
+                public void windowDeiconified(WindowEvent e) {
+                }
+
+                @Override
+                public void windowActivated(WindowEvent e) {
+                }
+
+                @Override
+                public void windowDeactivated(WindowEvent e) {
+                }
+            });
+        }else{
+            JOptionPane.showMessageDialog(this, "Please selected row");
+        }
+
     }//GEN-LAST:event_btn_updateStudentActionPerformed
 
     private void btn_deleteStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteStudentActionPerformed
-        DeleteStudentFrame dsf=new DeleteStudentFrame();
-        dsf.setVisible(true);
-        dsf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        if (tbl_StudentData.getSelectedRow() >= 0) {
+            DeleteStudentFrame dsf = new DeleteStudentFrame();
+            dsf.setVisible(true);
+            dsf.selectFeild(list.get(tbl_StudentData.getSelectedRow()));
+            dsf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            dsf.addWindowListener(new WindowListener() {
+
+                @Override
+                public void windowOpened(WindowEvent e) {
+                }
+
+                @Override
+                public void windowClosing(WindowEvent e) {
+                }
+
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    showDataTable();
+                }
+
+                @Override
+                public void windowIconified(WindowEvent e) {
+                }
+
+                @Override
+                public void windowDeiconified(WindowEvent e) {
+                }
+
+                @Override
+                public void windowActivated(WindowEvent e) {
+                }
+
+                @Override
+                public void windowDeactivated(WindowEvent e) {
+                }
+            });
+        }else{
+            JOptionPane.showMessageDialog(this, "Please selected row");
+        }
     }//GEN-LAST:event_btn_deleteStudentActionPerformed
 
     private void tbl_StudentDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_StudentDataMouseClicked
-        int index=tbl_StudentData.getSelectedRow();
-        System.out.println(index);
+
     }//GEN-LAST:event_tbl_StudentDataMouseClicked
+
+    private void btn_viewStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_viewStudentActionPerformed
+        if (tbl_StudentData.getSelectedRow() >= 0) {
+            ViewStudentFrame vsf = new ViewStudentFrame();
+            vsf.setVisible(true);
+            vsf.selectFeild(list.get(tbl_StudentData.getSelectedRow()));
+            //System.out.println(tbl_StudentData.getSelectedRow());
+            vsf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        }else{
+            JOptionPane.showMessageDialog(this, "Please selected row");
+        }
+    }//GEN-LAST:event_btn_viewStudentActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-       
+
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -269,8 +395,7 @@ public class MainFrame extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
-       
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainFrame().setVisible(true);

@@ -16,8 +16,8 @@ public class AddStudentFrame extends javax.swing.JFrame {
     /**
      * Creates new form AddStudentFrame
      */
-    DatabaseConnection dbcon=new DatabaseConnection();
-    
+    DatabaseConnection dbcon = new DatabaseConnection();
+
     public AddStudentFrame() {
         initComponents();
     }
@@ -196,33 +196,46 @@ public class AddStudentFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_submitActionPerformed
-        Student s=new Student();
-        //s.setID(0);
-        s.setFname(txt_fname.getText());
-        s.setLname(txt_lastname.getText());
-        s.setAge(Integer.parseInt(txt_age.getText()));
-        s.setAddress(txt_address.getText());
-        s.setGender((String) dd_gender.getSelectedItem());
-        s.setFaculty((String) dd_faculty.getSelectedItem());
-        s.setDepartment((String)dd_department.getSelectedItem());
-        s.setRegYear((String) dd_yearofREG.getSelectedItem());
-        
-        boolean result=dbcon.addStudent(s);
-        if (result) {
-            JOptionPane.showMessageDialog(this, "Add Student");
-            clearFeild();
-            MainFrame mf=new MainFrame();
-            mf.showDataTable();
+        if (cheackerValue()) {
+            Student s = new Student();
+            //s.setID(0);
+            s.setFname(txt_fname.getText());
+            s.setLname(txt_lastname.getText());
+            s.setAge(Integer.parseInt(txt_age.getText()));
+            s.setAddress(txt_address.getText());
+            s.setGender((String) dd_gender.getSelectedItem());
+            s.setFaculty((String) dd_faculty.getSelectedItem());
+            s.setDepartment((String) dd_department.getSelectedItem());
+            s.setRegYear((String) dd_yearofREG.getSelectedItem());
+
+            boolean result = dbcon.addStudent(s);
+            if (result) {
+                JOptionPane.showMessageDialog(this, "Add Student");
+                clearFeild();
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Wrong");
+            }
         } else {
-            JOptionPane.showMessageDialog(this, "Wrong");
+            JOptionPane.showMessageDialog(this, "one or more fields empty");
         }
+
     }//GEN-LAST:event_btn_submitActionPerformed
-    public void clearFeild(){
+    public void clearFeild() {
         txt_fname.setText("");
         txt_lastname.setText("");
         txt_age.setText("");
         txt_address.setText("");
     }
+
+    public boolean cheackerValue() {
+        if (txt_fname.getText().equals("") || txt_lastname.getText().equals("") || txt_age.getText().equals("") || txt_address.getText().equals("")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
